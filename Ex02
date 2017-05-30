@@ -1,0 +1,14 @@
+2.3 (a)
+Yes, it implements Uniform Causal Order because it says these lines:
+[Partial algorithm from slides]
+	p has prev. executed deliverCA(m’) ∀ m’ ∈ D
+	then
+	deliverCA(m)
+	prevDlvrs := prevDlvrs ∪ {m}
+	else
+	discard m
+That tells if m' is delivered before m then all other process has to deliver m' before m and if it does not happen it discards m. We can say m' has caused m in the above FIFO atomic broadcast.
+
+(b)
+No, because Uniform agreement(V) says if a CORRECT or NOT process delivers a message m, every correct process eventually delivers m. So for the wrong process it does not accept total order(XIII) i.e a wrong process can deliver m2 before m1 but in actual m1 should be delivered before m2.  
+We can simplify it if we consider only causal ordering where m1 causes m2 or use consensus.
